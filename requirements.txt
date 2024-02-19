@@ -1,0 +1,9 @@
+yfinance==0.2.18
+streamlit==1.26.0
+pandas==2.1.4
+numpy==1.26.3
+seaborn==0.12.2
+matplotlib==3.8.0
+lxml==4.9.3
+scikit-learn==1.2.
+rdkit==2018.03.4
