@@ -4,6 +4,14 @@ import shap
 from sklearn.datasets import fetch_california_housing
 import matplotlib.pyplot as pl
 import pickle
+import bz2file as bz2
+
+def decompress_pickle(file):
+    data = bz2.BZ2File(file, 'rb')
+    data = pickle.load(data)
+    return data
+    
+model = decompress_pickle('price_regression.pbz2')
 
 st.title('California House Price Prediction App')
 
@@ -42,29 +50,28 @@ st.header('Specified Input Parameters')
 st.write(df)
 st.write('---')
 
-model = pickle.load(open('price_regression.pkl', 'rb'))
-
 # Apply model to make predictions
 prediction = model.predict(df)
 
 st.header('Prediction of MedHouseVal')
+st.write('The value is expressed in hundreds of thousands of dollars ($100,000)')
 st.write(prediction)
 st.write('---')
 
 # Explaining the model's predictions using SHAP values
 # https://github.com/slundberg/shap
-explainer = shap.TreeExplainer(model)
-shap_values = explainer.shap_values(X)
+#explainer = shap.TreeExplainer(model)
+#shap_values = explainer.shap_values(X)
 
-st.header('Feature Importance')
-plt.title('Feature importance based on SHAP values')
-shap.summary_plot(shap_values, X)
-st.pyplot(bbox_inches='tight')
-st.write('---')
+#st.header('Feature Importance')
+#plt.title('Feature importance based on SHAP values')
+#shap.summary_plot(shap_values, X)
+#st.pyplot(bbox_inches='tight')
+#st.write('---')
 
-plt.title('Feature importance based on SHAP values (Bar)')
-shap.summary_plot(shap_values, X, plot_type='bar')
-st.pyplot(bbox_inches='tight')
+#plt.title('Feature importance based on SHAP values (Bar)')
+#shap.summary_plot(shap_values, X, plot_type='bar')
+#st.pyplot(bbox_inches='tight')
 
 
 
