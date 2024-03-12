@@ -11,7 +11,7 @@ def decompress_pickle(file):
     data = pickle.load(data)
     return data
     
-model = decompress_pickle('price_regression.pbz2')
+model = decompress_pickle('Regression-Boston-Housing/price_regression.pbz2')
 
 st.title('California House Price Prediction App')
 
